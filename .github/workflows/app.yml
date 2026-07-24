@@ -1,6 +1,6 @@
-name: weather
+name: app
 
-on: [push]
+on: [push,pull_request]
 
 jobs:
   build:
@@ -13,9 +13,9 @@ jobs:
           python-version: '3.x'
 
       - name: prepare dependencies
-        run: | 
+        run: |
           python3 -m pip install --upgrade pip
-          pip install -r weather/requirements.txt
+          pip install -r requirements.txt
 
-      - name: weather
-        run: python3 weather/weather.py
+      - name: run tests
+        run: pytest --doctest-modules --junitxml=junit/test-results.xml --cov=utils --cov-report=xml --cov-report=html
