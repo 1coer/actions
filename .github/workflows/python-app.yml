@@ -1,0 +1,21 @@
+name: Python package
+
+on: [push]  # act push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1st event. checkout
+      - uses: actions/checkout@v6
+
+      # 2nd event: set up
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      # 3rd event
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
