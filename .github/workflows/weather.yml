@@ -1,0 +1,21 @@
+name: weather
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: prepare dependencies
+        run: | 
+          python3 -m pip install --upgrade pip
+          pip install -r weather/requirements.txt
+
+      - name: weather
+        run: python3 weather/weather.py
