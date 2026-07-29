@@ -1,0 +1,20 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build containers & start services
+        run: docker compose -f compose.yml up -d
+
+      - name: Run tests
+        run: docker compose -f compose.yml run --rm api pytest
+
+      - name: Shutdown
+        if: always()
+        run: docker compose -f compose.yml down -v
