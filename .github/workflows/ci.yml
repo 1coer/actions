@@ -9,6 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Create CI environment
+        run: |
+          echo "DB_USER=user" >> .env
+          echo "DB_PASSWORD=password" >> .env
+          echo "DB_NAME=dbname" >> .env
+
       - name: Build containers & start services
         run: docker compose -f compose.yml up -d
 
