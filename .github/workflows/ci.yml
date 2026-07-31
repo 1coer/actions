@@ -14,6 +14,7 @@ jobs:
           echo "DB_USER=user" >> .env
           echo "DB_PASSWORD=password" >> .env
           echo "DB_NAME=dbname" >> .env
+          echo "DB_URL=postgresql://user:password@db/dbname" >> .env
 
       - name: Build containers & start services
         run: docker compose -f compose.yml up -d
